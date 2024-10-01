@@ -21,7 +21,7 @@ echo '*******************************'
 echo '* Listing upgradable packages *'
 echo '*******************************'
 
-apt list --upgradable
+apt list --upgradable -a
 listExitCode=$?
 if [ $listExitCode -ne 0 ]; then
     echo -e '\033[31mError listing upgradable packages, exit code $listExitCode\033[0m'
