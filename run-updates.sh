@@ -29,18 +29,6 @@ if [ $listExitCode -ne 0 ]; then
 fi
 
 echo ''
-echo '****************************'
-echo '* Removing unused packages *'
-echo '****************************'
-
-apt autoremove -y
-autoremoveExitCode=$?
-if [ $autoremoveExitCode -ne 0 ]; then
-    echo -e '\033[31mError removing unused packages, exit code $autoremoveExitCode\033[0m'
-    exit $autoremoveExitCode
-fi
-
-echo ''
 echo '**********************'
 echo '* Upgrading packages *'
 echo '**********************'
@@ -74,6 +62,18 @@ cleanExitCode=$?
 if [ $cleanExitCode -ne 0 ]; then
     echo -e '\033[31mError cleaning package cache, exit code $cleanExitCode\033[0m'
     exit $cleanExitCode
+fi
+
+echo ''
+echo '****************************'
+echo '* Removing unused packages *'
+echo '****************************'
+
+apt autoremove -y
+autoremoveExitCode=$?
+if [ $autoremoveExitCode -ne 0 ]; then
+    echo -e '\033[31mError removing unused packages, exit code $autoremoveExitCode\033[0m'
+    exit $autoremoveExitCode
 fi
 
 echo ''
