@@ -89,6 +89,34 @@ else
 fi
 
 echo ''
+echo '****************************'
+echo '* Listing upgradable snaps *'
+echo '****************************'
+
+snap refresh --list
+snapRefreshListExitCode=$?
+if [ $snapRefreshListExitCode -ne 0 ]; then
+    echo -e '\033[31mError retrieving list of upgradable snaps, exit code' $snapRefreshListExitCode '\033[0m'
+    exit $snapRefreshListExitCode
+else
+    echo -e '\033[32mListing upgradable snaps with exit code' $snapRefreshListExitCode '\033[0m'
+fi
+
+echo ''
+echo '****************'
+echo '* Update snaps *'
+echo '****************'
+
+snap refresh
+snapUpdateExitCode=$?
+if [ $snapUpdateExitCode -ne 0 ]; then
+    echo -e '\033[31mError updating snaps, exit code' $snapUpdateExitCode '\033[0m'
+    exit $snapUpdateExitCode
+else
+    echo -e '\033[32mUpdated snaps with exit code' $snapUpdateExitCode '\033[0m'
+fi
+
+echo ''
 echo '***********************'
 echo '* Checking for reboot *'
 echo '***********************'
